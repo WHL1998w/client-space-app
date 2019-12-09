@@ -2,42 +2,46 @@
 	<div class="container">
 			<div class="login-box bl-shadow ">
 				<div class="tab">
-					<span class="tab-item" :class="{active:signInisActive}" @click="signInclick">登录</span>
-					<span class="tab-item" :class="{active:signUpisActive}" @click="signUpclick">注册</span>
+					<span class="tab-item" :class="{active:signInisActive}" @click="signInclick">免密码登录</span>
+					<span class="tab-item" :class="{active:signUpisActive}" @click="signUpclick">密码登录</span>
 				</div>
 				<div class="tab-signIn-box" v-show="signInistrue==true">
-					<input type="text" name="account" class="input-box bl-shadow" placeholder="手机号/邮箱/自定义账号" v-model="userDto.mobile">
+					<input type="text" name="account" class="input-box bl-shadow" placeholder="手机号" v-model="userDto.mobile">
 					<p style="color: red; margin-left: 50px;" v-if="mobileistrue==true">!手机号不正确</p>
-					<input type="password" name="password" class="input-box bl-shadow" placeholder="密码" v-model="userDto.password">
-					<p style="color: red; margin-left: 50px;" v-if="passwordistrue==true">!密码不正确</p>
-					
-						<input type="text" class="input-box-small bl-shadow" placeholder="验证码" @keyup="getcode()" v-model="userDto.code" />
-						<img class="verify" @click.prevent="refresh" ref="codeImg" />
-					
+					<input type="code" class="input-box-small bl-shadow" placeholder="验证码" @keyup="getsignUpcode()" v-model="code">	
+					<button  v-if="!iscode1" class="bl-btn bl-btn-round bl-btn-nomal bl-btn-none1 btnDisabled" >
+						获取验证码
+					</button>
 					<div class="tab-bottom">
-						<button class="bl-btn bl-btn-round bl-btn-nomal btn-login "  @click="signIn(userDto)" v-if="iscode">登录</button>
+						<button class="bl-btn bl-btn-round  btn-login bl-shadow"  @click="signIn(userDto)" v-if="iscode">登录/注册</button>
+					</div>
+					<div class="line-box">
+					    <span class="line"></span>
+					    <span class="login-3rd">第三方登录</span>
+					    <span class="line"></span>
+					</div>
+					<div class="icon-box">
+					    <i class="iconfont" style="color: rgb(81, 195, 50)">&#xe709;</i>
+					    <i class="iconfont" style="color: rgb(48, 165, 221)">&#xe66a;</i>
+					    <i class="iconfont" style="color: rgb(230, 23, 45)">&#xe636;</i>
 					</div>
 				</div>
 				<div class="tab-signUp-box" v-show="signUpistrue==true">
 					<input type="text" name="account" class="input-box bl-shadow" placeholder="手机号" v-model="mobile" @keyup="getsignInmobile()">
-					
-					<input type="code" class="input-box-small bl-shadow" placeholder="验证码" @keyup="getsignUpcode()" v-model="code">
-					
-					<button @click="getCode" :disabled="codeDisabled" v-if="iscode1" class="bl-btn bl-btn-round bl-btn-nomal bl-btn-getcode" :class="{ 
-						btn:btnDisabled,
-						btnDisabled: btnDisabled}">
-						{{msg}}
-					</button>
-					<button  v-if="!iscode1" class="bl-btn bl-btn-round bl-btn-nomal bl-btn-none1 btnDisabled" >
-						获取验证码
-					</button>
 					<input type="password" v-model="password" class="input-box bl-shadow" placeholder="密码">
-					
-					<input type="e-mail" v-model="email" class="input-box bl-shadow" placeholder="邮箱">
 
 					<div class="tab-bottom">
-						<button class="bl-btn bl-btn-round bl-btn-nomal bl-btn-login " @click="signUp()" v-if="iscode2">注册</button>
-						<!-- <button class="bl-btn bl-btn-round bl-btn-nomal bl-btn-none " v-if="!iscode2">注册</button> -->
+						<button class="bl-btn bl-btn-round  btn-login bl-shadow" @click="signUp()" v-if="iscode2">登录</button>
+					</div>
+					<div class="line-box">
+					    <span class="line"></span>
+					    <span class="login-3rd">第三方登录</span>
+					    <span class="line"></span>
+					</div>
+					<div class="icon-box">
+					    <i class="iconfont" style="color: rgb(81, 195, 50)">&#xe709;</i>
+					    <i class="iconfont" style="color: rgb(48, 165, 221)">&#xe66a;</i>
+					    <i class="iconfont" style="color: rgb(230, 23, 45)">&#xe636;</i>
 					</div>
 				</div>
 
@@ -50,9 +54,9 @@
 	export default {
 		data() {
 			return {
-				iscode: false,
+				iscode: true,
 				iscode1: false,
-				iscode2: false,
+				iscode2: true,
 				timer: null,
 				timer1: null,
 				codeDisabled: false,
@@ -248,11 +252,59 @@
 				}
 			}
 		}
-
 	}
 </script>
 
 <style scoped>
+	/*iconfont图标，第三方登录用*/
+	@font-face {
+	  font-family: 'iconfont';  /* project id 1544591 */
+	  src: url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.eot');
+	  src: url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.eot?#iefix') format('embedded-opentype'),
+	  url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.woff2') format('woff2'),
+	  url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.woff') format('woff'),
+	  url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.ttf') format('truetype'),
+	  url('//at.alicdn.com/t/font_1544591_9916xmkl8jd.svg#iconfont') format('svg');
+	}
+	.iconfont {
+	    font-family: "iconfont", serif !important;
+	    font-size: 28px;
+	    font-style: normal;
+	    -webkit-font-smoothing: antialiased;
+	    -webkit-text-stroke-width: 0;
+	    -moz-osx-font-smoothing: grayscale;
+	}
+	.line-box {
+	    width: 90%;
+		margin-left: 20px;
+	    margin-top: 30px;
+	    display: inline-flex;
+	    align-items: center;
+	}
+	/*线条样式*/
+	.line {
+	    border-bottom: 1px solid #9b9b9b;
+	    flex: 0 0 33%;
+	}
+	/*第三方登录文字样式*/
+	.login-3rd {
+	    flex: 0 0 30%;
+	    color: #9b9b9b;
+	    font-size: 12px;
+	    text-align: center;
+	}
+	/*图标外层包裹区样式*/
+	.icon-box {
+	    width: 60%;
+		margin-left: 25%;
+	    display: inline-flex;
+	    justify-content: center;
+	    margin-top: 10px;
+	}
+	/*图标样式*/
+	.icon-box i {
+	    flex: 0 0 33%;
+	}
 	.container {
 		position: absolute;
 		top: 0;
@@ -262,7 +314,6 @@
 		background-image: url(../assets/image/1.jpg);
 		background-size: 120%;
 	}
-
 	.active {
 		color: #00BBDD;
 		font-weight: 600;
@@ -271,7 +322,7 @@
 
 	.login-box {
 		width: 360px;
-		height: 400px;
+		height: 320px;
 		border: 2px solid #FFFFFF;
 		border-radius: 10px;
 		background-color: #FFFFFF;
@@ -279,7 +330,6 @@
 		top: 150px;
 		left: 50%;
 	}
-
 	.tab {
 		display: flex;
 		align-items: center;
@@ -287,7 +337,6 @@
 		height: 40px;
 		background-color: #fff;
 	}
-
 	.tab-item {
 		cursor: pointer;
 		margin-right: 10px;
@@ -295,43 +344,32 @@
 		text-align: center;
 		line-height: 38px;
 	}
-
 	.input-box {
 		width: 70%;
 		height: 30px;
-		background-color: #fff;
 		border: 1px solid #e4e6e5;
 		border-radius: 3px;
-		color: #333;
-		font-size: 13px;
 		padding-left: 30px;
 		margin-top: 20px;
 		margin-left: 50px;
-
 	}
-
 	.input-box-small {
 		width: 30%;
 		height: 30px;
-		background-color: #fff;
 		border: 1px solid #e4e6e5;
 		border-radius: 3px;
-		color: #333;
-		font-size: 13px;
 		padding-left: 30px;
 		margin-top: 20px;
 		margin-left: 50px;
-
 	}
-
 	.tab-signIn-box {
 		height: 200px;
 		background-color: #FFFFFF;
 		color: #fff;
+		font-size: 13px;
 		margin-top: 0px;
 		animation: myfirst 2s;
 	}
-
 	.tab-signUp-box {
 		height: 220px;
 		background-color: #FFFFFF;
@@ -339,7 +377,6 @@
 		margin-top: 0px;
 		animation: mysecond 2s;
 	}
-
 	@keyframes myfirst {
 		from {
 			margin-left: 20px;
@@ -350,7 +387,6 @@
 			margin-left: 0px;
 		}
 	}
-
 	@keyframes mysecond {
 		from {
 			opacity: 0;
@@ -367,17 +403,16 @@
 		}
 
 	.tab-bottom {
-		height: 100px;
-		background-color: #FFFFFF;
-		color: #fff;
-		margin-top: 0px;
+		width: 70%;
+		margin: 0 auto;
+		height: 30px;
+		margin-top:20px;
 	}
-
 	.btn-login {
+		height: 100%;
+		width:100% ;
 		color: #FFFFFF;
 		background-color: rgb(26, 160, 52);
-		margin-left: 50px;
-		margin-top: 30px;
 		cursor: pointer;
 		animation: mythird 2s;
 	}
