@@ -44,12 +44,9 @@
 					    <i class="iconfont" style="color: rgb(230, 23, 45)">&#xe636;</i>
 					</div>
 				</div>
-
 			</div>
-
 	</div>
 </template>
-
 <script>
 	export default {
 		data() {
