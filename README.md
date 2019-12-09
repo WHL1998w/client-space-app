@@ -1,6 +1,6 @@
 # client-space-app
 
-## Project setup
+## PC端
 ```
 npm install
 ```
