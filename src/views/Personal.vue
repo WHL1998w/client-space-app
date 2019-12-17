@@ -1,19 +1,19 @@
 <template>
 	<div class="container bl-col">
 		<div class="header-background">
-			<img src="../assets/image/1.jpg" class="header-avatar" />
+			<img :src="users.backgroundimg" class="header-avatar" />
 			<div class="header-background-color bl-col">
 				<div class="bl-row head-sign">
-					<h1 class="head-font">XXX的个人空间</h1>
+					<h1 class="head-font">{{users.nickname}}的个人空间</h1>
 					<i class="iconfont vip">&#xe65e;</i>
 				</div>
 				<div class="introduction-position">
-					<p class="introduction-font">了却君王天下事，赢得生前身后名，可怜白发生。</p>
+					<p class="introduction-font">{{users.autograph}}</p>
 				</div>
 				<div class="bl-row avatar-position">
-					<img src="../assets/image/测试1.png" class="avatar bl-shadow">
+					<img :src="users.avatar" class="avatar bl-shadow">
 					<div class="bl-col">
-						<p class="introduction-font">流浪汉</p>
+						<p class="introduction-font">{{users.nickname}}</p>
 					</div>
 					
 				</div>
@@ -25,13 +25,13 @@
 			<div class="bl-row ">
 				<div class="bl-coll-3 left">
 				<div class="left-first bl-row bl-shadow">
-					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/"><h2>50</h2><p>相册</p></router-link></div>	
-					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/"><h2>67</h2><p>说说</p></router-link></div>
-					<div class="bl-coll-4 first-nob bl-col bl-center"><router-link to="/"><h2>97</h2><p>日志</p></router-link></div>
+					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/Photo"><h2>50</h2><p>相册</p></router-link></div>	
+					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/Talk"><h2>67</h2><p>说说</p></router-link></div>
+					<div class="bl-coll-4 first-nob bl-col bl-center"><router-link to="/Notes"><h2>97</h2><p>日志</p></router-link></div>
 				</div>
 				<div class="left-second bl-coll-4 bl-col">
 					<div class="second bl-shadow"><h3>个人档案</h3></div>
-					<div class="second-information bl-shadow"><h4 class="second-word">19岁，现居南京，蛇夫座青年</h4></div>
+					<div class="second-information bl-shadow"><h4 class="second-word">{{users.birthday}}，现居{{users.address}}，{{users.job}}</h4></div>
 				</div>
 				<div class="left-third bl-coll-4">
 					<div class="third bl-shadow"><h3>最近访客</h3></div>
@@ -50,12 +50,15 @@
 				</div>
 				<div class="right">
 					<div class="tab">
-						<span class="tab-item" :class="{active:introductionisActive}" @click="introductionclick">自我介绍</span>
-						<span class="tab-item" :class="{active:loveisActive}" @click="loveclick">我的爱好</span>
+						<span class="tab-item" :class="{active:introductionisActive}" @click="introductionclick">我的爱好</span>
+						<span class="tab-item" :class="{active:loveisActive}" @click="loveclick">自我介绍</span>
 					</div>
-					<div class="" v-show="introductionistrue==true">2333
+					<div class="" v-show="introductionistrue==true">
+					
+					
+					{{users.introduction}}
 					</div>
-					<div class="" v-show="loveistrue==true">
+					<div class="" v-show="loveistrue==true">					
 					</div>
 				</div>
 			</div>
@@ -72,8 +75,6 @@
 				loveisActive: false,
 				loveistrue: true,
 				introductionistrue: false
-				
-
 			}
 		},
 		
@@ -83,17 +84,16 @@
 				this.introductionistrue = false;
 				this.introductionisActive = true;
 				this.loveisActive = false;
-			},
-			
+			},		
 			loveclick() {
 				this.loveistrue = false;
 				this.introductionistrue = true;
 				this.introductionisActive = false;
 				this.loveisActive = true;
 			},
-			
-			
-			
+		},
+		created() {
+			this.users = JSON.parse(localStorage.getItem('user'))
 		}
 
 	}
@@ -265,7 +265,6 @@
 	.third{
 		border-bottom: 1px solid white;
 		font-weight: 100;
-		/* flex:  0 0 60%; */
 		height: 30px;
 		background-color: white;
 		padding: 0 15px;
@@ -278,7 +277,6 @@
 		height: 75px;
 		width: 75px;
 		margin-left: 4px;
-		/* margin-right: 5px; */
 		align-items: center;
 	}
 	.photo-word{

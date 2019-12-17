@@ -9,6 +9,8 @@ import Safe from '@/views/Safe.vue'
 import Verified from '@/views/Verified.vue'
 import Personal from '@/views/Personal.vue'
 import NotesDetail from '@/views/NotesDetail.vue'
+import Album from '@/views/Album.vue'
+import WriteLog from '@/views/WriteLog.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,28 +30,18 @@ const routes = [
 	{
 		path : '/personal',
 		component : Personal,
-		/* children :[
-			{
-				path : '/',
-				redirect : 'basic'
-			},
-			{
-				path : 'basic',
-				component : BasicData
-			},
-			{
-				path : 'safe',
-				component : Safe
-			},
-			{
-				path : 'verified',
-				component : Verified
-			}
-		] */
 	},
 	{
 		path: '/notes',
 		component: Notes
+	},
+	{
+		path: '/writeLog',
+		component:WriteLog
+	},
+	{
+		path: '/album',
+		component:Album
 	},
 	{
 		path: '/notes/:id',

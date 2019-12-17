@@ -2,7 +2,7 @@
 	<div>
 		<div id="notes">
 			<div class="al-container">
-			<p class="bl-title">{{notes.title}}</p>
+				<input style="border: none;width: 100%;" readonly class="bl-title" v-model="notes.title"/>
 			<div class="card bl-row">
 				<div class="bl-col2">
 				<router-link to="/profile">
@@ -16,7 +16,13 @@
 					</p>
 				</div>
 			</div>
-			<div v-html="notes.content"></div>
+			<textarea readonly class="input-content" v-model="notes.content">
+
+			</textarea>
+			<div class="btn-box">
+				<button  class="bl-btn bl-btn-round bl-btn-min btn-del bl-btn-none bl-btn-warning" @click="deleteBtn()">删除</button>
+				<button class="bl-btn bl-btn-round bl-btn-min bl-btn-none bl-btn-blue" @click="update()">编辑</button>
+			</div>
 		</div>
 		</div>
 	</div>
@@ -37,7 +43,14 @@
 			});
 		},
 		computed: {},
-		methods: {}
+		methods: {
+			update() {
+				
+			},
+			deleteBtn() {
+				
+			}
+		}
 	};
 </script>
 
@@ -65,5 +78,20 @@
 	}
 	.card{
 		margin-top: 10px;
+	}
+	.btn-box{
+		width: 200px;
+		height: 50px;
+		margin-left: 500px;
+		margin-top: 10px;
+	}
+	.btn-del{
+		margin-right: 10px;		
+	}
+	.input-content{
+		width: 100%;
+		height:500px;
+		font-size:15px;
+		background-image: url(../assets/image/log6.png);
 	}
 </style>

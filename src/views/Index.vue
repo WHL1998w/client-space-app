@@ -169,7 +169,6 @@
 				albumisActive: false,
 				logistrue: true,
 				albumistrue: false,
-				
 				/*轮播的效果*/
 				sliders: [{
 						"url": "#",

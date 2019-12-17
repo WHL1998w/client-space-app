@@ -1,9 +1,9 @@
 <template>
-	<div>
+<div>
 		<div class="header bl-df-between bl-header-background">
-			<div class="left">
+			<div class="left" >
 				<router-link to="/personal">
-					<p class="bl-title al-right">xxx的个人空间</p>
+					<p class="bl-title al-right" > {{users.nickname}}的个人空间</p></p>
 				</router-link>
 			</div>
 			<div class="right bl-row ">
@@ -19,10 +19,10 @@
 						<h2>日志</h2>
 					</div>
 				</router-link>
-				<router-link to="/index">
+				<router-link to="/album">
 					<div class="bl-row al-left">
-						<img src="../assets/image/说说.png" class="icon" />
-						<h2>说说</h2>
+						<img src="../assets/image/ziyuan.png" class="icon" />
+						<h2>相册</h2>
 					</div>
 				</router-link>
 				<div @mouseleave="Socialcontactleave" @mouseenter="SocialcontactEnter">
@@ -34,14 +34,14 @@
 						<div class="SocialContact-card bl-col">
 							<div class="bl-header-background SocialContact-card-header bl-col">
 								<div class="bl-row">
-									<div class="SocialContact-card-header-left"><img src="../assets/image/测试1.png" class="user-avatar circle-avatar user-avatar1" /></div>
+									<div class="SocialContact-card-header-left"><img :src="users.avatar" class="user-avatar circle-avatar user-avatar1" /></div>
 									<div class="SocialContact-card-header-center bl-col">
 										<div class="bl-row">
-											<p class="text-color-white">asdfghjkl</p>
+											<p class="text-color-white">{{users.nickname}}</p>
 											<i class="iconfont vip">&#xe65e;</i>
 										</div>
 										<div>
-											<p class="motto-font text-color-white">树欲静而风不止</p>
+											<p class="motto-font text-color-white">{{users.autograph}}</p>
 										</div>
 									</div>
 									<div class="SocialContact-card-header-right"><i class="iconfont weather" style="color: white;">&#xe643;</i></div>
@@ -148,79 +148,82 @@
 		<router-view class="bl-container" />
 	</div>
 </template>
-<script>
-	export default {
-		data() {
-			return {
-				personalistrue: false,
-				switchistrue: false,
-				opinionistrue: false,
-				setupistrue: false,
-				socialcontactistrue: false,
-				
-				
-				newsisActive: true,
-				friendsisActive: false,
-				newsistrue: true,
-				friendsistrue: false,
-			};
-		},
 
-		created: function() {},
-		methods: {
-			Setupleave() {
-				this.setupistrue = false;
+<script>
+export default {
+	data() {
+				return {
+					personalistrue: false,
+					switchistrue: false,
+					opinionistrue: false,
+					setupistrue: false,
+					socialcontactistrue: false,
+					newsisActive: true,
+					friendsisActive: false,
+					newsistrue: true,
+					friendsistrue: false,
+					
+					users:''
+				};
 			},
-			SetupEnter() {
-				this.setupistrue = true;
-			},
-			PersonalLeave() {
-				this.personalistrue = false;
-			},
-			PersonalEnter() {
-				this.personalistrue = true;
-			},
-			SwitchLeave() {
-				this.switchistrue = false;
-			},
-			SwitchEnter() {
-				this.switchistrue = true;
-			},
-			OpinionLeave() {
-				this.opinionistrue = false;
-			},
-			OpinionEnter() {
-				this.opinionistrue = true;
-			},
-			Socialcontactleave() {
-				this.socialcontactistrue = false;
-			},
-			SocialcontactEnter() {
-				this.socialcontactistrue = true;
-			},
-			newsclick() {
-				this.newsistrue = true;
-				this.friendsistrue = false;
-				this.newsisActive = true;
-				this.friendsisActive = false;
-			},
-			friendsclick() {
-				this.newsistrue = false;
-				this.friendsistrue = true;
-				this.newsisActive = false;
-				this.friendsisActive = true;
-			},
-			search() {
-				
-			},
-			addFriends() {
-				
+	   created() {
+		   this.users = JSON.parse(localStorage.getItem('user'))
+	   },
+			methods: {
+				Setupleave() {
+					this.setupistrue = false;
+				},
+				SetupEnter() {
+					this.setupistrue = true;
+				},
+				PersonalLeave() {
+					this.personalistrue = false;
+				},
+				PersonalEnter() {
+					this.personalistrue = true;
+				},
+				SwitchLeave() {
+					this.switchistrue = false;
+				},
+				SwitchEnter() {
+					this.switchistrue = true;
+				},
+				OpinionLeave() {
+					this.opinionistrue = false;
+				},
+				OpinionEnter() {
+					this.opinionistrue = true;
+				},
+				Socialcontactleave() {
+					this.socialcontactistrue = false;
+				},
+				SocialcontactEnter() {
+					this.socialcontactistrue = true;
+				},
+				newsclick() {
+					this.newsistrue = true;
+					this.friendsistrue = false;
+					this.newsisActive = true;
+					this.friendsisActive = false;
+				},
+				friendsclick() {
+					this.newsistrue = false;
+					this.friendsistrue = true;
+					this.newsisActive = false;
+					this.friendsisActive = true;
+				},
+				search() {
+					
+				},
+				addFriends() {
+					
+				}
 			}
-		}
-	};
+};
 </script>
+
 <style scoped>
-	@font-face {
+@font-face {
 		font-family: 'iconfont';
 		/* project id 1432485 */
 		src: url('//at.alicdn.com/t/font_1432485_66zjv4u0u1.eot');
@@ -390,5 +393,4 @@
 		margin-top: 10px;
 		background-color: #AAAAAA;
 	}
-	
 </style>

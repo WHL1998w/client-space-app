@@ -2,7 +2,7 @@
 	<div class="container">
 		<div class="login-box bl-shadow ">
 			<div class="tab">
-				<span class="tab-item" :class="{ active: signUpisActive }" @click="signUpclick">免密码登录</span>
+				<span class="tab-item" :class="{ active: signUpisActive }" @click="signUpclick">账号注册</span>
 				<span class="tab-item" :class="{ active: loginisActive }" @click="loginclick">密码登录</span>
 			</div>
 			<!-- 免密登录 -->
@@ -14,8 +14,8 @@
 				<input type="text" name="account" class="input-box bl-shadow" placeholder="手机号" v-model="userDto.mobile" @input="checkmobile()" />
 
 				<input type="text" class="input-box-small bl-shadow" placeholder="验证码" v-model="userDto.code" />
-				<button type="submit" class="bl-btn bl-btn-round bl-btn-nomal bl-btn-none1" @click="getsms()">获取验证码</button>
-				<div class="tab-bottom"><button type="submit" class="bl-btn bl-btn-round  btn-login bl-shadow" @click="signIn(userDto)">登录/注册</button></div>
+				<button type="submit" class="bl-btn bl-btn-round bl-btn-nomal bl-btn-none1" @click="getsms">获取验证码</button>
+				<div class="tab-bottom"><button type="submit" class="bl-btn bl-btn-round  btn-login bl-shadow" @click="signIn()">注册</button></div>
 				<div class="line-box">
 					<span class="line"></span>
 					<span class="login-3rd">第三方登录</span>
@@ -108,7 +108,7 @@ export default {
 			let that = this;
 			this.axios({
 				method: 'post',
-				url: this.GLOBAL.baseUrl + '/sms/sendcode',
+				url: this.GLOBAL.baseUrl + '/user/sms',
 				data: {
 					mobile: this.userDto.mobile
 				}
@@ -117,20 +117,22 @@ export default {
 			});
 		},
 		// 3.验证手机号和短信验证码   登录
-		signIn(userDto) {
+		signIn() {
 			let that = this;
 			this.axios({
 				method: 'post',
-				url: this.GLOBAL.baseUrl + '/user/sign',
+				url: this.GLOBAL.baseUrl + '/user/signup',
 				data: {
 					mobile: this.userDto.mobile,
-					code:this.signDto.code
+					code:this.userDto.code,
 				}
 			}).then(res => {
 				console.log(res);
 				alert(res.data.msg);
-				if (res.data.msg == '成功') {
-					alert('登录注册成功'), this.$router.push('/Index');
+				if (res.data.msg == "成功") {
+					 localStorage.setItem('user',JSON.stringify(res.data.data));
+					alert("注册成功");
+					 this.$router.push('/personal');
 				}
 			});
 		},
@@ -151,7 +153,6 @@ export default {
 		  this.$router.push('/Index');
 		  //将后端获取到的值传送到前端，相当于将数据暂时存到localStroage
 		   localStorage.setItem('user',JSON.stringify(res.data.data));
-		   
 		  }
 		  if(res.data.msg=="用户不存在"){
 		   this.mobileistrue=true;

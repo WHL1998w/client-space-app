@@ -1,5 +1,5 @@
 <script>
-const baseUrl = 'http://r2803786f9.zicp.vip/api'
+const baseUrl = 'http://localhost:8080/api'
 const token = ''
 export default {
 	baseUrl,
