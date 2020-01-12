@@ -5,12 +5,12 @@ import Index from '@/views/Index.vue'
 import Notes from '@/views/Notes.vue'
 import Login from '@/views/Login.vue'
 import BasicData from '@/views/BasicData.vue'
-import Safe from '@/views/Safe.vue'
-import Verified from '@/views/Verified.vue'
 import Personal from '@/views/Personal.vue'
 import NotesDetail from '@/views/NotesDetail.vue'
 import Album from '@/views/Album.vue'
 import WriteLog from '@/views/WriteLog.vue'
+import DataBank from '@/views/DataBank.vue'
+import InsertAblum from '@/views/InsertAlbum.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -46,13 +46,21 @@ const routes = [
 	{
 		path: '/notes/:id',
 		component: NotesDetail
+	},
+	{
+		path: '/dataBank',
+		component:DataBank
+	},
+	{
+		path:'/insertAblum',
+		component:InsertAblum
 	}
 	]
  },
      {
      	path: '/',
      	component: Login
-     }
+     },
 ]
 
 const router = new VueRouter({

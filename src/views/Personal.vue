@@ -25,7 +25,7 @@
 			<div class="bl-row ">
 				<div class="bl-coll-3 left">
 				<div class="left-first bl-row bl-shadow">
-					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/Photo"><h2>50</h2><p>相册</p></router-link></div>	
+					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/album"><h2>50</h2><p>相册</p></router-link></div>	
 					<div class="bl-coll-4 first bl-col bl-center"><router-link to="/Talk"><h2>67</h2><p>说说</p></router-link></div>
 					<div class="bl-coll-4 first-nob bl-col bl-center"><router-link to="/Notes"><h2>97</h2><p>日志</p></router-link></div>
 				</div>
@@ -48,17 +48,16 @@
 					</div>					
 				</div>
 				</div>
-				<div class="right">
+				<div class="right bl-shadow">
 					<div class="tab">
 						<span class="tab-item" :class="{active:introductionisActive}" @click="introductionclick">我的爱好</span>
 						<span class="tab-item" :class="{active:loveisActive}" @click="loveclick">自我介绍</span>
 					</div>
 					<div class="" v-show="introductionistrue==true">
-					
-					
-					{{users.introduction}}
+					我是：{{users.nickname}}，我的个人宣言：{{users.introduction}}。现居{{users.address}}，是一名学生{{users.job}}。我的生日是：{{users.birthday}}
 					</div>
-					<div class="" v-show="loveistrue==true">					
+					<div class="" v-show="loveistrue==true">
+						{{users.hobby}}
 					</div>
 				</div>
 			</div>
@@ -124,11 +123,10 @@
 		height: 40px;
 		width: 200px;
 		
-	}
-	
+	}	
 	.tab-item {
 		cursor: pointer;
-		margin-right: 10px;
+		margin-right: -200px;
 		flex: 0 0 80px;
 		text-align: center;
 		line-height: 38px;
@@ -272,6 +270,8 @@
 	}
 	.third-photo{
 		flex-flow:row wrap;
+		margin-top: 10px;
+		margin-left: 10px;
 	}
 	.photo-size{
 		height: 75px;
@@ -287,7 +287,12 @@
 		color: white;
 	}
 	.right{
-		height: 500px;
-		margin-left: 20%;
+		background-color: white;
+		height: 300px;
+		width: 450px;
+		margin-left: 10%;
+		border-radius: 5%;
+		padding: 15px 20px 15px 15px;
 	}
+
 </style>

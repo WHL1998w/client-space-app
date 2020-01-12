@@ -2,7 +2,7 @@
 	<div>
 		<div id="notes">
 			<div class="al-container">
-				<input style="border: none;width: 100%;" readonly class="bl-title" v-model="notes.title"/>
+				<input style="border: none;width: 100%;" class="bl-title" v-model="notes.title"/>
 			<div class="card bl-row">
 				<div class="bl-col2">
 				<router-link to="/profile">
@@ -16,7 +16,7 @@
 					</p>
 				</div>
 			</div>
-			<textarea readonly class="input-content" v-model="notes.content">
+			<textarea  class="input-content" v-model="notes.content">
 
 			</textarea>
 			<div class="btn-box">
@@ -32,7 +32,10 @@
 	export default {
 		data() {
 			return {
-				notes:{}
+				notes:{
+					title:'',
+					content:''
+				}
 			};
 		},
 		created() {
@@ -45,10 +48,38 @@
 		computed: {},
 		methods: {
 			update() {
-				
+				this.axios({
+					method: 'post',
+					url: this.GLOBAL.baseUrl + '/notes/updatenotes',
+					data: {
+						title:this.notes.title,
+						content:this.notes.content
+					}
+				}).then(res => {
+					alert(res.data.msg)
+					if(res.data.msg=="成功"){
+					this.$router.push('/notes');
+					console.log(res.data.data);
+					}
+				});				
 			},
+			// 删除日志（成功）
 			deleteBtn() {
-				
+				var id = this.$route.params.id;
+				this.axios({
+					method: 'delete',
+					url: this.GLOBAL.baseUrl + '/notes/'+id,
+					data: {
+						title:this.notes.title,
+						content:this.notes.content
+					}
+				}).then(res => {
+					alert(res.data.msg)
+					if(res.data.msg=="成功"){
+					this.$router.push('/notes');
+					console.log(res.data.data);
+					}
+				});		
 			}
 		}
 	};

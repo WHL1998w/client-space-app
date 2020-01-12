@@ -17,8 +17,8 @@
 			<div class="bl-col-2 left">
 				<div class="bl-card bl-shadow">
 					<div class="bl-card-header bl-col">
-						<img :src="users.backgroundimg" class="left-top-images"  />
-						<img :src="users.avatar" class="avatar-max avatar-images circle-avatar"  />
+						<img :src="users.backgroundimg" class="left-top-images" />
+						<img :src="users.avatar" class="avatar-max avatar-images circle-avatar" />
 					</div>
 					<div class="bl-card-body bl-card-body1">
 						<h1> {{users.nickname}}</h1>
@@ -37,11 +37,34 @@
 						</table>
 					</div>
 				</div>
-				<div class="bl-card left-middle bl-shadow">
-					<h1>日志收藏</h1>
-				</div>
-				<div class="bl-card left-bottom bl-shadow">
-					<h1>图片收藏</h1>
+				<div class="bl-card left-middle bl-shadow bl-col">
+					<h4 class="text-color-gray hotusers">推荐用户</h4>
+					<div class="list bl-row">
+						<div class="bl-col-1">
+							<img src="../assets/image/01.jpg" class="circle-avatar user-avatar" />
+						</div>
+						<div class="bl-col-6 news">
+							<h5>FriendName</h5>
+							<p class="text-color-gray">个性签名</p>
+						</div>
+						<div class="bl-col-4 bl-row">
+							<img src="../assets/image/add.png" style="width: 20px;height: 20px;margin-top: 18px;" />
+							<button class="bl-btn bl-btn-round bl-btn-gree bl-btn-minl" style="margin-top: 18px;">添加</button>
+						</div>
+					</div>
+					<div class="list bl-row">
+						<div class="bl-col-1">
+							<img src="../assets/image/01.jpg" class="circle-avatar user-avatar" />
+						</div>
+						<div class="bl-col-6 news">
+							<h5>FriendName</h5>
+							<p class="text-color-gray">个性签名</p>
+						</div>
+						<div class="bl-col-4 bl-row">
+							<img src="../assets/image/add.png" style="width: 20px;height: 20px;margin-top: 18px;" />
+							<button class="bl-btn bl-btn-round bl-btn-gree bl-btn-minl" style="margin-top: 18px;">添加</button>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="bl-col-6 main">
@@ -58,46 +81,32 @@
 						<img src="../assets/image/accessory.png" class="icon" />
 					</div>
 				</div>
+				<!-- 日志与相册的切换卡的制作 -->
 				<div class="bl-col dynamic bl-shadow">
 					<div class="tab">
 						<span class="tab-item bl-title" :class="{active:logisActive}" @click="logclick">日志</span>
 						<span class="tab-item bl-title" :class="{active:albumisActive}" @click="albumclick">相册</span>
 					</div>
+					<!-- 展示日志 -->
 					<div class="tab-box bl-col" v-show="logistrue==true">
-						<div class="box bl-col bl-shadow">
+						<div v-for="(item,index) in notes" :key="index" class="box bl-col bl-shadow">
+
 							<div class="content bl-shadow">
-								<div class="box1 bl-row">
-									<div class="bl-col-1">
-										<img src="../assets/image/instagram_3.jpg" class="avatar-min circle-avatar" />
-									</div>
-									<div class="bl-col-9">
-										<h2>NickName</h2>
-										<h3>7:00</h3>
-									</div>
-								</div>
+								<h3 style="text-align: center;">{{item.title}}</h3>
 								<hr />
-								<div class="box2">
-									<p>
-										空山新雨后，天气晚来秋。
-										明月松间照，清泉石上流。
-										—— 王维《山居秋暝》
-										青枫江上秋帆远，
-										白帝城边古木疏。
-										—— 高适《送李少府贬峡中王少府贬长沙》
-										湖光秋月两相和，
-										潭面无风镜未磨。
-										—— 刘禹锡《望洞庭》
-									</p>
+								<div class="box2" style="text-align: center;">
+									<router-link :to="{ path: '/notes/' + item.id }">
+										<p>
+											{{ item.content.substring(0, 120) }} ……</p>
+									</router-link>
 								</div>
-								<div class="box3">
-									<div class="box3-card">
-										<img src="../assets/image/02.jpg" class="img-circle" />
-									</div>
-									<div class="box3-card">
-										<img src="../assets/image/02.jpg" class="img-circle" />
+								<div class="box31">
+									<div>
+										<img :src="item.accessStatus" style="width: 95%;height: 180px;margin-left: 15px;" />
 									</div>
 								</div>
 							</div>
+
 							<div class="box4 bl-row">
 								<div class="bl-col-1">
 									<img src="../assets/image/good.png" />
@@ -114,24 +123,19 @@
 									<input class="comment1 text-color-gray" type="text" name="comment1" value="评论" />
 								</label>
 							</div>
+
 						</div>
 						<div class="box">
-						
+
 						</div>
 					</div>
+					<!-- 展示相册 -->
 					<div class="tab-box bl-col" v-show="albumistrue==true">
 						<div class="box3">
-							<div class="box3-card">
-								<img src="../assets/image/02.jpg" class="img-circle" />
-							</div>
-							<div class="box3-card">
-								<img src="../assets/image/02.jpg" class="img-circle" />
-							</div>
-							<div class="box3-card">
-								<img src="../assets/image/02.jpg" class="img-circle" />
-							</div>
-							<div class="box3-card">
-								<img src="../assets/image/02.jpg" class="img-circle" />
+							<div class="box3-card bl-shadow" v-for="(item, index) in albums" :key="index">
+								<img :src="item.cover" class="img-circle" />
+								<h3 class="photos text-color-white">{{item.photos}}</h3>
+								<h4 class="ablum-name">{{item.albumName}}</h4>
 							</div>
 						</div>
 					</div>
@@ -139,36 +143,49 @@
 			</div>
 			<div class="bl-col-2">
 				<div class="bl-card right-top bl-shadow">
-					<h1>特别关心</h1>
-				</div>
-				<div class="bl-card right-middle bl-shadow">
-					<h1>日志收藏</h1>
+					<h4 class="text-color-gray hotusers">热门文章</h4>
+					<hr />
+					<div class="list bl-row">
+						<div class="bl-col-6 news">
+							<h3>Git相关技能</h3>
+							<div class="bl-row">
+								<img src="../assets/image/yanjing.png" />
+								<p class="text-color-gray">35人</p>
+							</div>
+						</div>
+						<div class="bl-col-4 bl-row">
+							<img src="../assets/image/01.jpg" class="img-circle" />
+						</div>
+					</div>
+					<hr />
+					<div class="list bl-row">
+						<div class="bl-col-6 news">
+							<h3>Java编程学习</h3>
+							<div class="bl-row">
+								<img src="../assets/image/yanjing.png" />
+								<p class="text-color-gray">40人</p>
+							</div>
+						</div>
+						<div class="bl-col-4 bl-row">
+							<img src="../assets/image/02.jpg" class="img-circle" />
+						</div>
+					</div>
+					<hr />
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
-<script>
-	export default {
-		name: 'Index',
-		data() {
-			return {
 
-			}
-		},
-		created() {
-
-		}
-	}
-</script>
 <script>
 	export default {
 		data() {
-			return {
-				logisActive: true,
+			return {	
+			    logisActive: true,
 				albumisActive: false,
 				logistrue: true,
 				albumistrue: false,
+				users:'',
 				/*轮播的效果*/
 				sliders: [{
 						"url": "#",
@@ -191,12 +208,36 @@
 			}
 		},
 		created: function() {
-			 this.users = JSON.parse(localStorage.getItem('user'))
+			this.users = JSON.parse(localStorage.getItem('user'))
 			this.$nextTick(() => {
-				this.timer = setInterval(() => {
-					this.autoPlay()
-				}, 3000)
-			})
+					this.timer = setInterval(() => {
+						this.autoPlay()
+					}, 3000)
+				}),
+				//日志
+				this.axios({
+					method: 'post',
+					url: this.GLOBAL.baseUrl + '/notes/selectallnotes',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+				}).then(res => {
+					alert(res.data)
+					this.notes = res.data;
+					console.log(res.data);
+				});
+				//获取所有相册的数据请求
+				this.axios({
+					method: 'post',
+					url: this.GLOBAL.baseUrl + '/album/selectallalbums',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+				}).then(res => {
+					this.albums = res.data;
+					console.log(res.data);
+				});
+				
 		},
 		methods: {
 			go() {
@@ -239,6 +280,23 @@
 		border: 0.5px solid #CCCCCC;
 	}
 
+	.photos {
+		position: relative;
+		z-index: 999;
+		left: 90px;
+		top: -30px;
+	}
+
+	.ablum-name {
+		position: relative;
+		top: -30px;
+	}
+
+	.hotusers {
+		margin-top: 20px;
+		margin-left: -135px;
+	}
+
 	.background-color {
 		width: 100%;
 		height: 100%;
@@ -254,11 +312,7 @@
 	}
 
 	.left-middle {
-		height: 300px;
-	}
-
-	.left-bottom {
-		height: 350px;
+		height: 450px;
 	}
 
 	.left-top-images {
@@ -310,11 +364,7 @@
 	}
 
 	.right-top {
-		height: 300px;
-	}
-
-	.right-middle {
-		height: 250px;
+		height: 600px;
 	}
 
 	table.one {
@@ -345,11 +395,13 @@
 		width: 100%;
 		background-color: aliceblue;
 	}
+
 	.al-right {
 		width: 30%;
 		margin-top: 25px;
 		align-items: center;
 	}
+
 	.icon {
 		margin-left: 30px;
 		width: 30px;
@@ -374,13 +426,23 @@
 	.box3 {
 		width: 100%;
 		display: grid;
+		grid-template-columns: 240px 240px 240px;
+		grid-template-rows: 210px 210px 210px;
+	}
+
+	.box31 {
+		width: 100%;
 		grid-template-columns: 160px 160px 160px;
 		grid-template-rows: 170px 170px 170px;
 	}
 
+
 	.box3-card {
+		text-align: center;
 		padding: 5px 5px 5px 5px;
 		border: 1px solid #EEEEEE;
+		margin-right: 10px;
+		margin-bottom: 20px;
 	}
 
 	.box4 {
@@ -475,6 +537,7 @@
 		height: 40px;
 		background-color: #fff;
 	}
+
 	.tab-item {
 		cursor: pointer;
 		margin-right: 10px;
@@ -483,6 +546,7 @@
 		line-height: 38px;
 		font-size: 25px;
 	}
+
 	.tab-box {
 		width: 100%;
 		background-color: #ffffff;
@@ -490,9 +554,22 @@
 		margin-top: 0px;
 		animation: myfirst 2s;
 	}
+
 	.active {
 		color: #00bbdd;
 		font-weight: 600;
 		border-bottom: 2px solid #00bbdd;
+	}
+
+	.list {
+		cursor: pointer;
+		/*鼠标悬停变小手*/
+		width: 100%;
+		height: 70px;
+		padding: 5px 5px 5px 5px;
+	}
+
+	.news {
+		padding: 10px 10px;
 	}
 </style>

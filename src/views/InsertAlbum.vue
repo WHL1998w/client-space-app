@@ -3,22 +3,15 @@
 		<div class="header-background">
 			<img src="../assets/image/2.jpg" class="header-avatar" />
 			<div class="header-background-color bl-col">
-				<p class="title-front text-color-white">记录</p>
-				<p class="meta-front text-color-bule">用心发现美,用笔记录美</p>
+				<p class="title-front text-color-white">分享</p>
+				<p class="meta-front text-color-bule">用心发现美,记录生活点滴</p>
 			</div>
 		</div>
 		<div class="write-box bl-shadow">
-			<img style="z-index: 9999;" src="../assets/image/1.png" />
-			<input class="bl-title title" type="text" value="请输入标题" v-model="notes.title"/>
-			<textarea class="input-con bl-sub-title" v-model="notes.content">记录美好，记录心情</textarea>
+			<input class="bl-title title" type="text" value="请输入标题" v-model="albums.albumName"/>
+			<textarea class="input-con bl-sub-title" v-model="albums.cover">记录美好，记录心情</textarea>
 			<div class="bl-row bottom-box">
-				<button class="bl-btn bl-btn-min bl-btn-none bl-btn-round bl-btn-blue btn-send " @click="insertLog()">发表</button>
-				<select>
-					<option value="gong">公开可见</option>
-					<option value="saab">仅自己可见</option>
-					<option value="opel">指定好友可见</option>
-					<option value="audi">好友可见</option>
-				</select>
+				<button class="bl-btn bl-btn-min bl-btn-none bl-btn-round bl-btn-blue btn-send " @click="insertAlbum()">新增</button>
 			</div>
 		</div>
 
@@ -29,9 +22,9 @@
 	export default {
 		data() {
 			return {
-				notes:{
-					title:'',
-					content:''
+				albums:{
+					albumName:'',
+					cover:''
 				}
 			};
 		},
@@ -43,16 +36,16 @@
 			insertLog() {
 				this.axios({
 					method: 'post',
-					url: this.GLOBAL.baseUrl + '/notes/insertnotes',
+					url: this.GLOBAL.baseUrl + '/album/insetablum',
 					data: {
 						userId:this.users.id,
-						title:this.notes.title,
-						content:this.notes.content
+						albumName:this.albums.albumName,
+						cover:this.albums.cover
 					}
 				}).then(res => {
 					alert(res.data.msg)
 					if(res.data.msg=="成功"){
-					this.$router.push('/notes');
+					this.$router.push('/album');
 					console.log(res.data.data);
 					}
 				});		

@@ -135,12 +135,14 @@
 						<h2>设置</h2>
 					</div>
 					<div class="SetUp-container bl-col" v-if="setupistrue">
-						<div class="Setup-label" :class="{ 'Setup-label-click': personalistrue === true }" @mouseleave="PersonalLeave"
-						 @mouseenter="PersonalEnter">个人资料</div>
-						<div class="Setup-label" :class="{ 'Setup-label-click': switchistrue === true }" @mouseleave="SwitchLeave"
-						 @mouseenter="SwitchEnter">切换账号</div>
-						<div class="Setup-label" :class="{ 'Setup-label-click': opinionistrue === true }" @mouseleave="OpinionLeave"
-						 @mouseenter="OpinionEnter">意见反馈</div>
+						<router-link to="/dataBank">
+							<div class="Setup-label" :class="{ 'Setup-label-click': personalistrue === true }" @mouseleave="PersonalLeave"
+							 @mouseenter="PersonalEnter">个人资料</div>
+						</router-link>
+						 <router-link to="/">
+						 	<div class="Setup-label" :class="{ 'Setup-label-click': switchistrue === true }" @mouseleave="SwitchLeave"
+						 	 @mouseenter="SwitchEnter">切换账号</div>
+						 </router-link>
 					</div>
 				</div>
 			</div>
@@ -161,8 +163,7 @@ export default {
 					newsisActive: true,
 					friendsisActive: false,
 					newsistrue: true,
-					friendsistrue: false,
-					
+					friendsistrue: false,			
 					users:''
 				};
 			},

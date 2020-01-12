@@ -101,6 +101,7 @@ ul {
 
 .bl-col-6 {
 	flex: 1 1 50%;
+
 }
 
 .bl-col-4 {
@@ -109,6 +110,7 @@ ul {
 
 .bl-col-3 {
 	flex: 1 1 25%;
+	
 }
 
 .bl-col-2 {
@@ -259,7 +261,14 @@ h6 {
 .bl-btn-blue {
 	color: #fff;
 	background-color: #00BBDD;
-
+}
+.bl-btn-pick{
+	color: #fff;
+	background-color: #ff6ec4;
+}
+.bl-btn-gree{
+	color: #fff;
+	background-color: rgb(26, 250, 41);
 }
 
 /* 按钮尺寸 */
@@ -276,6 +285,10 @@ h6 {
 .bl-btn-min {
 	height: 30px;
 	width: 60px;
+}
+.bl-btn-minl{
+	height: 25px;
+	width: 40px;
 }
 
 /*表单元素样式*/
@@ -320,7 +333,7 @@ hr {
 
 .img-circle {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	border-radius: 2%;
 }
 
@@ -359,3 +372,4 @@ hr {
 	font-size: 20px;
 	font-weight: 100;
 }
+
