@@ -4,7 +4,7 @@
 			<img src="../assets/image/album.jpg" class="header-avatar" />
 			<div class="header-background-color bl-col">
 				<p class="title-front text-color-white ">分享</p>
-				<p class="meta-front text-color-bule">分享你的生活,记录美好</p>
+				<p class="meta-front text-color-bule">分享你的生活,记录</p>
 			</div>
 		</div>
 		<div class="bl-row ablum-box">
